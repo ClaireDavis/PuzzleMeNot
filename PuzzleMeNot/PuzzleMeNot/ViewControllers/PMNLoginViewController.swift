@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PMNLoginViewController: PMNBaseViewController {
+class PMNLoginViewController: PMNBaseViewController, UITextFieldDelegate {
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -21,6 +21,7 @@ class PMNLoginViewController: PMNBaseViewController {
     nameTextField.placeholder = "Name"
     nameTextField.textAlignment = NSTextAlignment.Center
     nameTextField.returnKeyType = UIReturnKeyType.Done
+    nameTextField.delegate = self;
     view.addSubview(nameTextField)
     view.centerViews([nameTextField])
     
@@ -41,5 +42,11 @@ class PMNLoginViewController: PMNBaseViewController {
   // or something of that sort
   func login() {
     PMNRootViewController.sharedInstance.transitionToBody()
+  }
+  
+  // allows text field to dismiss keyboard when return key is pressed
+  func textFieldShouldReturn(textField: UITextField) -> Bool {
+    textField.resignFirstResponder()
+    return true
   }
 }
